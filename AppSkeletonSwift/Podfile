@@ -1,0 +1,17 @@
+platform :ios, '8.0'
+use_frameworks!
+
+target 'AppSkeletonSwift' do
+
+pod 'Alamofire'
+
+end
+
+target 'AppSkeletonSwiftTests' do
+
+end
+
+target 'AppSkeletonSwiftUITests' do
+
+end
+
