@@ -10,7 +10,7 @@ class Utils {
 	// MARK: - Configuration
 	
 	// Configure label
-	static func configureLabel(label: UILabel, text: String?, font: UIFont?, textColor: UIColor?) {
+	class func configureLabel(label: UILabel, text: String?, font: UIFont?, textColor: UIColor?) {
 		
 		// Set text
 		if text != nil {
@@ -29,7 +29,7 @@ class Utils {
 	}
 	
     // Configure button
-    static func configureButton(button: UIButton, title: String?, font: UIFont?, titleColor: UIColor?, titleColorHighlighted: UIColor?, image: String?, backgroundImage: String?) {
+    class func configureButton(button: UIButton, title: String?, font: UIFont?, titleColor: UIColor?, titleColorHighlighted: UIColor?, image: String?, backgroundImage: String?) {
         
         // Set text
         if title != nil {
@@ -79,7 +79,7 @@ class Utils {
     }
 	
 	// Configure UITextField
-	static func configureTextField(txtField: UITextField, text: String?, placeholder: String?, font: UIFont?, textColor: UIColor?, backgroundImage: String?, leftPadding: CGFloat, rightPadding: CGFloat) {
+	class func configureTextField(txtField: UITextField, text: String?, placeholder: String?, font: UIFont?, textColor: UIColor?, backgroundImage: String?, leftPadding: CGFloat, rightPadding: CGFloat) {
 		
 		// Set text
 		if text != nil {
@@ -124,7 +124,7 @@ class Utils {
 	}
 	
 	// Configure UITextView
-	static func configureTextView(txtView: UITextView, text: String?, font: UIFont?, textColor: UIColor?) {
+	class func configureTextView(txtView: UITextView, text: String?, font: UIFont?, textColor: UIColor?) {
 		
 		// Set text
 		if text != nil {
@@ -143,7 +143,7 @@ class Utils {
 	}
     
     // Create Label
-    static func createLabel(frame frame: CGRect, font: UIFont, textColor: UIColor, textAlignment: NSTextAlignment, text: String) -> UILabel {
+    class func createLabel(frame frame: CGRect, font: UIFont, textColor: UIColor, textAlignment: NSTextAlignment, text: String) -> UILabel {
         let label = UILabel()
         
         label.frame         = frame
@@ -156,7 +156,7 @@ class Utils {
     }
 	
 	// Set drop down shadow
-    static func applyPlainShadow(view: UIView, radius: CGFloat, opacity: Float) {
+    class func applyPlainShadow(view: UIView, radius: CGFloat, opacity: Float) {
 		let layer = view.layer
 		layer.shadowColor = UIColor.blackColor().CGColor
 		layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -165,7 +165,7 @@ class Utils {
 	}
     
     // Start or Stop activity indicatior
-    static func startStopIndicator(processing processing: Bool, activityIndicator: UIActivityIndicatorView) {
+    class func startStopIndicator(processing processing: Bool, activityIndicator: UIActivityIndicatorView) {
         if processing { activityIndicator.startAnimating() }
         else          { activityIndicator.stopAnimating()  }
     }
@@ -173,12 +173,12 @@ class Utils {
 	// MARK: - OS
 	
     // Get screen size
-    static func getScreenSize() -> CGSize {
+    class func getScreenSize() -> CGSize {
         return UIScreen.mainScreen().bounds.size
     }
     
     // Get current Wi-Fi name
-    static func fetchSSIDInfo() -> String {
+    class func fetchSSIDInfo() -> String {
         var currentSSID = String()
         if let interfaces = CNCopySupportedInterfaces() {
             for i in 0..<CFArrayGetCount(interfaces) {
@@ -197,7 +197,7 @@ class Utils {
 	// MARK: - Links and Share
 	
     // Open link
-    static func openLink(link: String) {
+    class func openLink(link: String) {
         let url = NSURL(string: link)!
         if UIApplication.sharedApplication().canOpenURL(url) {
             UIApplication.sharedApplication().openURL(url)
@@ -205,7 +205,7 @@ class Utils {
     }
     
     // Present share options
-    static func shareTextImageAndURL(parentVC: UIViewController, sharingText: String?, sharingImage: UIImage?, sharingURL: NSURL?) {
+    class func shareTextImageAndURL(parentVC: UIViewController, sharingText: String?, sharingImage: UIImage?, sharingURL: NSURL?) {
         var sharingItems = [AnyObject]()
         
         if let text = sharingText {
@@ -225,7 +225,7 @@ class Utils {
 	// MARK: - Conversions
 	
 	// String to Int
-	static func stringToInt(string: String) -> Int {
+	class func stringToInt(string: String) -> Int {
 		let numberFromString = NSNumberFormatter().numberFromString(string)
 		let int = numberFromString!.integerValue
 		
@@ -233,19 +233,20 @@ class Utils {
 	}
     
     // Seconds to Hours, Minutes and Seconds
-    static func secondsToHoursMinutesSeconds (seconds: Int) -> (Int, Int, Int) {
+    class func secondsToHoursMinutesSeconds (seconds: Int) -> (Int, Int, Int) {
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
     
-    // String from string date ()
-    static func stringFromStringDateWithDateFormat(format: String, dateString: String) -> String {
+    // String from string date
+    class func stringFromStringDateWithDateFormat(format: String, dateString: String) -> String {
         let date = dateFromString(dateString)
         return stringFromDate(date, format: format)
     }
 
     // Date from String
-    static func dateFromString(var dateString: String) -> NSDate {
+    class func dateFromString(dateString: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
+        var dateString = dateString
         
         // Some date formats from API are with dots and some are with dash
         if dateString.containsString("."){
@@ -263,7 +264,7 @@ class Utils {
     }
     
     // String from Date
-    static func stringFromDate(date: NSDate, format: String) -> String {
+    class func stringFromDate(date: NSDate, format: String) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = format
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
@@ -271,7 +272,7 @@ class Utils {
     }
     
     // Change constraint multiplier
-    static func changeMultiplier(constraint: NSLayoutConstraint, multiplier: CGFloat) -> NSLayoutConstraint {
+    class func changeMultiplier(constraint: NSLayoutConstraint, multiplier: CGFloat) -> NSLayoutConstraint {
         let newConstraint = NSLayoutConstraint(
             item: constraint.firstItem,
             attribute: constraint.firstAttribute,
@@ -292,7 +293,7 @@ class Utils {
 	// MARK: - UIAlertView
     
     // Show basic alert view
-    static func showAlert(title title: String, message: String) {
+    class func showAlert(title title: String, message: String) {
         let vc = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
@@ -301,19 +302,19 @@ class Utils {
 	}
     
     // No internet alert view
-    static func noInternet() {
+    class func noInternet() {
         showAlert(title: Alert.TITLE_ERROR, message: "No internet")
     }
     
     // API error alert view
-    static func apiError() {
+    class func apiError() {
         showAlert(title: Alert.TITLE_ERROR, message: "API error")
     }
 	
 	// MARK: - Support
 	
 	// Find and print Font Family
-	static func printFontFamilies() {
+	class func printFontFamilies() {
 		for family: String in UIFont.familyNames() {
 			print("\(family)")
 			for names: String in UIFont.fontNamesForFamilyName(family) {

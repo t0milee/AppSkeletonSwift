@@ -36,7 +36,7 @@ class GenericDatePicker: NSObject {
         }
         
         // Add action for value changed
-        datePicker.addTarget(self, action: "dateChanged", forControlEvents: .ValueChanged)
+        datePicker.addTarget(self, action: #selector(GenericDatePicker.dateChanged), forControlEvents: .ValueChanged)
     }
     
     // Date changed action
